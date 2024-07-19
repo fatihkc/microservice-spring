@@ -1,24 +1,16 @@
 version: '3.4'
 
 services:
-  postgres-spring:
-    image: spring-microservices/postgres
-    container_name: spring-postgres
-    ports:
-      - "5432:5432"
-    build:
-      context: ./postgres
-      dockerfile: Dockerfile
-    environment:
-      POSTGRES_USER: dbuser
-      POSTGRES_PASSWORD: dbpass
   spring-order:
     image: spring-microservices/order
     container_name: spring-order
+    environment:
+      - DB_URL=jdbc:postgresql://:5432/dbinvoicing
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
     ports:
       - "18081:8080"
     links:
-      - postgres-spring
       - zipkin
     build:
       context: ./microservice-spring-order
@@ -26,10 +18,13 @@ services:
   spring-shipping:
     image: spring-microservices/shipping
     container_name: spring-shipping
+    environment:
+      - DB_URL=jdbc:postgresql://:5432/dbinvoicing
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
     ports:
       - "18083:8080"
     links:
-      - postgres-spring
       - spring-order
       - zipkin
     build:
@@ -38,10 +33,13 @@ services:
   spring-invoicing:
     image: spring-microservices/invoicing
     container_name: spring-invoicing
+    environment:
+      - DB_URL=jdbc:postgresql://:5432/dbinvoicing
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
     ports:
       - "18082:8080"
     links:
-      - postgres-spring
       - spring-order
       - zipkin
     build:
