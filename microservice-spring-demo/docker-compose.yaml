@@ -22,6 +22,7 @@ services:
       - DB_URL=jdbc:postgresql://:5432/dbinvoicing
       - DB_USERNAME=postgres
       - DB_PASSWORD=password
+      - ORDER_URL=spring-order
     ports:
       - "18083:8080"
     links:
@@ -37,6 +38,7 @@ services:
       - DB_URL=jdbc:postgresql://:5432/dbinvoicing
       - DB_USERNAME=postgres
       - DB_PASSWORD=password
+      - ORDER_URL=spring-order
     ports:
       - "18082:8080"
     links:
