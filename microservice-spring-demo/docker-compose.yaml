@@ -20,7 +20,7 @@ services:
       - DB_URL=/dbshipping
       - DB_USERNAME=postgres
       - DB_PASSWORD=password
-      - ORDER_URL=http://127.0.0.1:18081/feed
+      - ORDER_URL=http://spring-order:8080/feed
     ports:
       - "18083:8080"
     links:
@@ -35,7 +35,7 @@ services:
       - DB_URL=/dbinvoicing
       - DB_USERNAME=postgres
       - DB_PASSWORD=password
-      - ORDER_URL=http://127.0.0.1:18081/feed
+      - ORDER_URL=http://spring-order:8080/feed
     ports:
       - "18082:8080"
     links:
